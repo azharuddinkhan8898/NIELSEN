@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        textarea {
+            width: 100%;
+        }
+    </style>
+    <title>NIELSEN Digital Ad Ratings (DAR) TAGS</title>
+</head>
+
+<body>
+    <div class="container-fluid" style="padding-bottom: 50px; padding-top: 50px;">
+        <h3 class="text-center" style="margin-bottom: 30px;">NIELSEN Digital Ad Ratings (DAR) TAGS</h3>
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <textarea name="" placeholder="Input" cols="30" rows="10" id="input"></textarea>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <textarea name="" placeholder="Output" cols="30" rows="10" id="output"></textarea>
+            </div>
+        </div>
+        <br />
+        <button id="convert" class="btn btn-primary">Convert</button>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            document.getElementById("convert").addEventListener('click', function () {
+                try{
+                    var textInput = $("#input").val().trim();
+                var arrayInput = textInput.split("\n\n")
+                var arrayInput2 = [];
+                arrayInput.forEach(function (el) {
+                    var temp = [];
+                    var arr = el.split("\n");
+                    arr.forEach(function (ell) {
+                        temp.push(ell.trim());
+                    });
+                    var temp1 = temp[0].split("(");
+                    if(temp1.length>2){
+                        
+                        temp1.shift();
+                        var z = temp1.join("(");
+                        var y = z.split(")");
+                        y.pop();
+                        temp1 = y.join(")");
+                    }
+                    else{
+                        temp1 = temp1[1].split(")")[0];
+                    }
+                    //[1].split(")")[0];
+                    var temp2 = temp[2].replace('<img src="', '').replace('" style="display:none"/>', '');
+                    arrayInput2.push(temp1 + '\t' + temp2);
+                });
+                var finalText = arrayInput2.join("\n");
+                $("#output").val(finalText);
+                }
+                catch{
+                    alert("Please provide input in right format");
+                }
+                
+            });
+        });
+    </script>
+</body>
+
+</html>
