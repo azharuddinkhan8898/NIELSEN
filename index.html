@@ -8,11 +8,15 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./css/style.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      textarea {
+        width: 100%;
+      }
+    </style>
     <title>NIELSEN Digital Ad Ratings (DAR) TAGS</title>
   </head>
 
@@ -26,27 +30,17 @@
       </h3>
       <div class="row">
         <div class="col-md-6 col-sm-6">
-          <div class="file-input">
-            <input type="file" />
-            <span class="button">Choose</span>
-            <span class="label" data-js-label
-              >Please choose or drag & drop Nielsen Tags txt file.</span
-            >
-          </div>
-          <div class="or-divider"><span>OR</span></div>
           <textarea
             name=""
-            placeholder="Enter Nielsen Tags txt file content."
+            placeholder="Input"
             cols="30"
             rows="10"
             id="input"
           ></textarea>
         </div>
         <div class="col-md-6 col-sm-6">
-          <span class="copy"></span>
           <textarea
             name=""
-            style="margin-top: 113px;"
             placeholder="Output"
             cols="30"
             rows="10"
@@ -56,32 +50,52 @@
       </div>
       <br />
       <button id="convert" class="btn btn-primary">Convert</button>
-      <button id="reset" class="btn btn-danger" style="margin-left: 10px;">
-        Reset
-      </button>
-      <label class="switch" style="margin-left: 30px;">
-        <input type="checkbox" id="auto" />
-        <span class="slider round"></span>
-      </label>
-      <span
-        style="
-          display: inline-block;
-          line-height: 20px;
-          position: relative;
-          top: 2px;
-          font-weight: bold;
-          margin-left: 5px;
-        "
-        >Auto convert</span
-      >
     </div>
-    <div id="snackbar">Text copied!</div>
+
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
       crossorigin="anonymous"
     ></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="./scripts/custom.js"></script>
+    <script>
+      $(function () {
+        document
+          .getElementById("convert")
+          .addEventListener("click", function () {
+            try {
+              var textInput = $("#input").val().trim();
+              var arrayInput = textInput.split("\n\n");
+              var arrayInput2 = [];
+              arrayInput.forEach(function (el) {
+                var temp = [];
+                var arr = el.split("\n");
+                arr.forEach(function (ell) {
+                  temp.push(ell.trim());
+                });
+                var temp1 = temp[0].split("(");
+                if (temp1.length > 2) {
+                  temp1.shift();
+                  var z = temp1.join("(");
+                  var y = z.split(")");
+                  y.pop();
+                  temp1 = y.join(")");
+                } else {
+                  temp1 = temp1[1].split(")")[0];
+                }
+                //[1].split(")")[0];
+                var temp2 = temp[2]
+                  .replace('<img src="', "")
+                  .replace('" style="display:none"/>', "");
+                arrayInput2.push(temp1 + "\t" + temp2);
+              });
+              var finalText = arrayInput2.join("\n");
+              $("#output").val(finalText);
+            } catch {
+              alert("Please provide input in right format");
+            }
+          });
+      });
+    </script>
   </body>
 </html>

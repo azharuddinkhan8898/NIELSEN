@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>NIELSEN Digital Ad Ratings (DAR) TAGS</title>
+  </head>
+
+  <body>
+    <div
+      class="container-fluid"
+      style="padding-bottom: 50px; padding-top: 50px;"
+    >
+      <h3 class="text-center" style="margin-bottom: 30px;">
+        NIELSEN Digital Ad Ratings (DAR) TAGS
+      </h3>
+      <div class="row">
+        <div class="col-md-6 col-sm-6">
+          <div class="file-input">
+            <input type="file" />
+            <span class="button">Choose</span>
+            <span class="label" data-js-label
+              >Please choose or drag & drop Nielsen Tags txt file.</span
+            >
+          </div>
+          <div class="or-divider"><span>OR</span></div>
+          <textarea
+            name=""
+            placeholder="Enter Nielsen Tags txt file content."
+            cols="30"
+            rows="10"
+            id="input"
+          ></textarea>
+        </div>
+        <div class="col-md-6 col-sm-6">
+          <span class="copy"></span>
+          <textarea
+            name=""
+            style="margin-top: 113px;"
+            placeholder="Output"
+            cols="30"
+            rows="10"
+            id="output"
+          ></textarea>
+        </div>
+      </div>
+      <br />
+      <button id="convert" class="btn btn-primary">Convert</button>
+      <button id="reset" class="btn btn-danger" style="margin-left: 10px;">
+        Reset
+      </button>
+      <label class="switch" style="margin-left: 30px;">
+        <input type="checkbox" id="auto" />
+        <span class="slider round"></span>
+      </label>
+      <span
+        style="
+          display: inline-block;
+          line-height: 20px;
+          position: relative;
+          top: 2px;
+          font-weight: bold;
+          margin-left: 5px;
+        "
+        >Auto convert</span
+      >
+    </div>
+    <div id="snackbar">Text copied!</div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="./scripts/custom.js"></script>
+  </body>
+</html>
